@@ -34,6 +34,7 @@ p {
 #map-container {
   height: 800px;
 }
-path {
+.leaflet-overlay-pane svg path{
   fill: #B3E090;
+  pointer-events: auto;
 }
