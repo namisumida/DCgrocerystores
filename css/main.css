@@ -24,6 +24,15 @@ h3 {
 p {
   font-size: 13px;
 }
+#options {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  height: 50px;
+}
+#timeline-svg {
+  position: relative;
+}
 #graphic {
   margin-top: 20px;
 }
@@ -37,4 +46,13 @@ p {
 .leaflet-overlay-pane svg path{
   fill: #B3E090;
   pointer-events: auto;
+}
+.dataLabel {
+  font-size: 11px;
+  fill: rgb(50,50,50);
+  text-anchor: middle;
+  cursor: pointer;
+}
+.timeline_circle {
+  cursor: pointer;
 }
