@@ -1,6 +1,7 @@
 var w = 800;
 var h = 800;
 var dataset;
+var path, projection;
 
 // Create leaflet map
 function addLmaps() {
@@ -30,8 +31,8 @@ d3.json("Data/Grocery_Store_Locations.json", function(geoShape) {
   var svg = d3.select("#map-container").select("svg")
               .attr("pointer-events", "auto")
   var g = svg.append("g");
-  var projection = d3.geoTransform({ point: projectPoint });
-  var path = d3.geoPath().projection(projection);
+  projection = d3.geoTransform({ point: projectPoint });
+  path = d3.geoPath().projection(projection);
   d3_features = g.selectAll("points")
                     	.data(dataset.features)
                     	.enter()
@@ -108,5 +109,14 @@ d3.json("Data/Grocery_Store_Locations.json", function(geoShape) {
   };
 	dcMap.on("viewreset", reset);
 	reset();
+
+  // Update when clicking years
+  svg_timeline.selectAll(".timeline_g").on("click", function(d) {
+    // Only update if it's one of the years that we have data for
+    if (![1991, 1992, 1993, 1994, 1996, 1997, 1998, 1999, 2001, 2002, 2003, 2004, 2006, 2007].includes(d)) {
+      update_timeline(d);
+    }
+  })
+
 
 })

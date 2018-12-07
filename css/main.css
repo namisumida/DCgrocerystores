@@ -44,7 +44,6 @@ p {
   height: 800px;
 }
 .leaflet-overlay-pane svg path{
-  fill: #B3E090;
   pointer-events: auto;
 }
 .dataLabel {
