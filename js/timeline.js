@@ -30,7 +30,7 @@ svg_timeline.selectAll("timeline_g")
             .append("g")
             .attr("class", "timeline_g")
 
-// Create circles
+// Options circles
 svg_timeline.selectAll(".timeline_g")
             .append("circle")
             .attr("class", "timeline_circle")
@@ -43,54 +43,51 @@ svg_timeline.selectAll(".timeline_g")
               if ([1991, 1992, 1993, 1994, 1996, 1997, 1998, 1999, 2001, 2002, 2003, 2004, 2006, 2007].includes(d)) {
                 return "white";
               }
-              else if (d.PRESENT90=="Yes") {
+              else if (d==1990) {
                 return redRainbow.colourAt(1)
               }
-              else if (d.PRESENT95=="Yes") {
+              else if (d==1995) {
                 return redRainbow.colourAt(2)
               }
-              else if (d.PRESENT00=="Yes") {
+              else if (d==2000) {
                 return redRainbow.colourAt(3)
               }
-              else if (d.PRESENT05=="Yes") {
+              else if (d==2005) {
                 return redRainbow.colourAt(4)
               }
-              else if (d.PRESENT08=="Yes") {
+              else if (d==2008) {
                 return redRainbow.colourAt(5)
               }
-              else if (d.PRESENT09=="Yes") {
+              else if (d==2009) {
                 return redRainbow.colourAt(6)
               }
-              else if (d.PRESENT10=="Yes") {
+              else if (d==2010) {
                 return redRainbow.colourAt(7)
               }
-              else if (d.PRESENT11=="Yes") {
+              else if (d==2011) {
                 return redRainbow.colourAt(8)
               }
-              else if (d.PRESENT12=="Yes") {
+              else if (d==2012) {
                 return redRainbow.colourAt(9)
               }
-              else if (d.PRESENT13=="Yes") {
+              else if (d==2013) {
                 return redRainbow.colourAt(10)
               }
-              else if (d.PRESENT14=="Yes") {
+              else if (d==2014) {
                 return redRainbow.colourAt(11)
               }
-              else if (d.PRESENT15=="Yes") {
+              else if (d==2015) {
                 return redRainbow.colourAt(12)
               }
-              else if (d.PRESENT16=="Yes") {
+              else if (d==2016) {
                 return redRainbow.colourAt(13)
               }
-              else if (d.PRESENT17=="Yes") {
+              else if (d==2017) {
                 return redRainbow.colourAt(14)
               }
               else { return redRainbow.colourAt(15); }
             })
-            .style("stroke", function(d) {
-              if (d==2018) { return lightRed; }
-              else { return dark_gray; }
-            });
+            .style("stroke", dark_gray);
 
 // Create year labels
 svg_timeline.selectAll(".timeline_g")
@@ -112,7 +109,7 @@ svg_timeline.selectAll(".timeline_g")
             });
 
 // Updates
-var update_timeline = function(currYear) {
+var updateTimeline = function(currYear) {
 
   // Figure out year index based on current year
   if (currYear >= 2008) {
@@ -123,91 +120,91 @@ var update_timeline = function(currYear) {
   else if (currYear==2000) { var yearIndex = 3; }
   else if (currYear==2005) { var yearIndex = 4; }
 
-  // Data labels
-  svg_timeline.selectAll(".dataLabel")
-              .text(function(d) {
-                if (d==currYear) {
-                  return d;
-                }
-              })
-              .style("font-weight", function(d) {
-                if (d==currYear) { return 900; }
-                else { return 400; }
-              });
-
-  // Timeline circles
-  svg_timeline.selectAll(".timeline_circle")
-              .style("fill", function(d) {
-                if ([1991, 1992, 1993, 1994, 1996, 1997, 1998, 1999, 2001, 2002, 2003, 2004, 2006, 2007].includes(d)) {
-                  return "white";
-                }
-                else if (d==currYear) { return redRainbow.colourAt(yearIndex); }
-                else if (d<currYear) { return darkRed; }
-                else { return dark_gray; }
-              })
-              .style("stroke", function(d) {
-                if (d==currYear) { return redRainbow.colourAt(yearIndex); }
-                else if (d<currYear) { return darkRed; }
-                else { return dark_gray; }
-              });
-
-  // Paths
-  d3_features.style("fill", function(d) {
-                var varName = "PRESENT"+currYear.toString().substring(2);
-                if (d.properties[varName] == "Yes") {
-
-                  // Color all past ones dark and the new ones as light
-                  if (d.properties['firstYearOpened']==varName) {
-                    return lightRed;
+  if (currYear==2018) {
+    // Year labels
+    svg_timeline.selectAll(".dataLabel")
+                .text(function(d,i) {
+                  if (i%5==0 | d==2018) {
+                    return d;
                   }
-                  else { return darkRed; }
-
-                  // Color by each year's color
-                  /*if (d.properties.PRESENT90=="Yes") {
+                })
+                .style("font-weight", function(d) {
+                  if (d==currYear) { return 900; }
+                  else { return 400; }
+                });
+    // Timeline circles
+    svg_timeline.selectAll(".timeline_circle")
+                .style("fill", function(d) {
+                  if ([1991, 1992, 1993, 1994, 1996, 1997, 1998, 1999, 2001, 2002, 2003, 2004, 2006, 2007].includes(d)) {
+                    return "white";
+                  }
+                  else if (d==1990) {
                     return redRainbow.colourAt(1)
                   }
-                  else if (d.properties.PRESENT95=="Yes") {
+                  else if (d==1995) {
                     return redRainbow.colourAt(2)
                   }
-                  else if (d.properties.PRESENT00=="Yes") {
+                  else if (d==2000) {
                     return redRainbow.colourAt(3)
                   }
-                  else if (d.properties.PRESENT05=="Yes") {
+                  else if (d==2005) {
                     return redRainbow.colourAt(4)
                   }
-                  else if (d.properties.PRESENT08=="Yes") {
+                  else if (d==2008) {
                     return redRainbow.colourAt(5)
                   }
-                  else if (d.properties.PRESENT09=="Yes") {
+                  else if (d==2009) {
                     return redRainbow.colourAt(6)
                   }
-                  else if (d.properties.PRESENT10=="Yes") {
+                  else if (d==2010) {
                     return redRainbow.colourAt(7)
                   }
-                  else if (d.properties.PRESENT11=="Yes") {
+                  else if (d==2011) {
                     return redRainbow.colourAt(8)
                   }
-                  else if (d.properties.PRESENT12=="Yes") {
+                  else if (d==2012) {
                     return redRainbow.colourAt(9)
                   }
-                  else if (d.properties.PRESENT13=="Yes") {
+                  else if (d==2013) {
                     return redRainbow.colourAt(10)
                   }
-                  else if (d.properties.PRESENT14=="Yes") {
+                  else if (d==2014) {
                     return redRainbow.colourAt(11)
                   }
-                  else if (d.properties.PRESENT15=="Yes") {
+                  else if (d==2015) {
                     return redRainbow.colourAt(12)
                   }
-                  else if (d.properties.PRESENT16=="Yes") {
+                  else if (d==2016) {
                     return redRainbow.colourAt(13)
                   }
-                  else if (d.properties.PRESENT17=="Yes") {
+                  else if (d==2017) {
                     return redRainbow.colourAt(14)
                   }
-                  else { return redRainbow.colourAt(15); }*/
-                }
-                else { return "none"; }
-             })
+                  else { return redRainbow.colourAt(15); }
+                });
+  }
+  else {
+    // Year labels
+    svg_timeline.selectAll(".dataLabel")
+                .text(function(d) {
+                  if (d==currYear) {
+                    return d;
+                  }
+                })
+                .style("font-weight", function(d) {
+                  if (d==currYear) { return 900; }
+                  else { return 400; }
+                });
+    // Timeline circles
+    svg_timeline.selectAll(".timeline_circle")
+                .style("fill", function(d) {
+                  if ([1991, 1992, 1993, 1994, 1996, 1997, 1998, 1999, 2001, 2002, 2003, 2004, 2006, 2007].includes(d)) {
+                    return "white";
+                  }
+                  else if (d==currYear) { return lightRed; }
+                  else if (d<currYear) { return darkRed; }
+                  else { return dark_gray; }
+                });
+   }; // end else
 
 }; // end update timeline function def

@@ -36,10 +36,6 @@ p {
 #graphic {
   margin-top: 20px;
 }
-#graphic-svg {
-  width: 800px;
-  height: 800px;
-}
 #map-container {
   height: 800px;
 }
